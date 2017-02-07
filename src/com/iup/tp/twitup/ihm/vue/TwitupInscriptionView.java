@@ -19,7 +19,7 @@ import javax.swing.JTextField;
 
 import com.iup.tp.twitup.ihm.observers.IObserverInscription;
 
-public class TwitupInscriptionView implements ITwitUpView , IObserverInscription{
+public class TwitupInscriptionView implements ITwitUpView{
 
 	private JPanel jPanel;
 //	private JMenuBar menuBar;
@@ -151,24 +151,6 @@ public class TwitupInscriptionView implements ITwitUpView , IObserverInscription
 		// TODO Auto-generated method stub
 		return this.jPanel;
 	}
-
-	@Override
-	public void sendInscription(String userTag, String username, String password) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void inscription() {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	public void inscriptionOk()
-	{
-//		JLabel message = new JLabel("Votre inscription a été validée.");
-	}
-	
 
 	
 	
