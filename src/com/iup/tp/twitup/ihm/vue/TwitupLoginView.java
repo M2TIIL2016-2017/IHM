@@ -16,9 +16,7 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.plaf.synth.SynthSpinnerUI;
 
-import com.iup.tp.twitup.controller.observers.ILoginObserverController;
 import com.iup.tp.twitup.ihm.observers.IObserverLogin;
 
 public class TwitupLoginView implements ITwitUpView{

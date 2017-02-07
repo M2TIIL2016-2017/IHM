@@ -8,7 +8,6 @@ import com.iup.tp.twitup.controller.observers.ILoginObserverController;
 import com.iup.tp.twitup.core.EntityManager;
 import com.iup.tp.twitup.datamodel.IDatabase;
 import com.iup.tp.twitup.datamodel.User;
-import com.iup.tp.twitup.ihm.observers.IObserverInscription;
 import com.iup.tp.twitup.ihm.observers.IObserverUser;
 
 public class UserController implements IObserverUser{

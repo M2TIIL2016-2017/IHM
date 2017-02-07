@@ -5,22 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javafx.animation.FadeTransition;
-import javafx.animation.ParallelTransition;
-import javafx.animation.ScaleTransition;
-import javafx.animation.TranslateTransition;
+import com.iup.tp.twitup.datamodel.Twit;
+import com.iup.tp.twitup.mock.ITwitListObserver;
+
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.HPos;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.util.Duration;
-
-import com.iup.tp.twitup.datamodel.Twit;
-import com.iup.tp.twitup.mock.ITwitListObserver;
 
 public class MockTwitListComponentJFX extends Pane implements ITwitListObserver {
 
@@ -101,7 +93,7 @@ public class MockTwitListComponentJFX extends Pane implements ITwitListObserver 
 					oldTwitComponent.hideTwit();
 				}
 
-				// Placement des composants à ajouter (en conservant la liste triée)
+				// Placement des composants ï¿½ ajouter (en conservant la liste triï¿½e)
 				replaceTwit(allTwitToShow);
 
 				// Ajout des animations d'apparition

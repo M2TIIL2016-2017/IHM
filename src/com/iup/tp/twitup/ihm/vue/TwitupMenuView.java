@@ -8,17 +8,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.swing.ImageIcon;
-import javax.swing.JComponent;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 import com.iup.tp.twitup.controller.observers.ILoginObserverController;
 import com.iup.tp.twitup.datamodel.User;
-import com.iup.tp.twitup.ihm.Fichier1;
 import com.iup.tp.twitup.ihm.Message;
 import com.iup.tp.twitup.ihm.observers.IObserverInscription;
-import com.iup.tp.twitup.ihm.observers.IObserverLogin;
 
 public class TwitupMenuView implements IObserverInscription, ILoginObserverController{
 
@@ -62,10 +59,6 @@ public class TwitupMenuView implements IObserverInscription, ILoginObserverContr
 		this.menuBar.add(inscriptionMenu);
 		
 		inscriptionMenu.addMouseListener(new MouseListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				
-			}
 
 			@Override
 			public void mouseClicked(MouseEvent arg0) {

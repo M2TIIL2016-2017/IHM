@@ -2,7 +2,6 @@ package com.iup.tp.twitup.core;
 
 import java.io.File;
 import java.util.Properties;
-import java.util.Set;
 
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -19,9 +18,6 @@ import com.iup.tp.twitup.events.file.IWatchableDirectory;
 import com.iup.tp.twitup.events.file.WatchableDirectory;
 import com.iup.tp.twitup.ihm.TwitupMainView;
 import com.iup.tp.twitup.ihm.TwitupMock;
-import com.iup.tp.twitup.ihm.observers.IObserverLogin;
-import com.iup.tp.twitup.ihm.vue.ITwitUpView;
-import com.iup.tp.twitup.ihm.vue.TwitupConfigView;
 import com.iup.tp.twitup.ihm.vue.TwitupInscriptionView;
 import com.iup.tp.twitup.ihm.vue.TwitupLoginView;
 import com.iup.tp.twitup.ihm.vue.TwitupMenuView;

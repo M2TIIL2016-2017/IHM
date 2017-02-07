@@ -6,27 +6,21 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
-import javax.swing.JMenuBar;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import com.iup.tp.twitup.common.Constants;
 import com.iup.tp.twitup.datamodel.User;
-import com.iup.tp.twitup.ihm.Fichier1;
-import com.iup.tp.twitup.ihm.observers.IObserverLogin;
 
 public class TwitupUserView implements ITwitUpView{
 
 	private JPanel jPanel;
-	private JMenuBar menuBar;
+//	private JMenuBar menuBar;
 	private User unUser;
 
 	public TwitupUserView(User unUser)
@@ -41,7 +35,7 @@ public class TwitupUserView implements ITwitUpView{
 		 * Partie Option Menu
 		 * 
 		 */
-		JPanel userPanel = new JPanel();
+//		JPanel userPanel = new JPanel();
 		
 		this.jPanel = new JPanel();
 		this.jPanel.setLayout(new GridBagLayout());
