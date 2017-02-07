@@ -60,7 +60,8 @@ public class UserController implements IObserverUser{
 		return false;
 	}
 	@Override
-	public void changeAvatar(File uneImage, String userTag) {
+	public boolean changeAvatar(File uneImage, String userTag) {
+		return false;
 		// TODO Auto-generated method stub
 		
 	}

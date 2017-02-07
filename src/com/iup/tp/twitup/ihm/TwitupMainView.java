@@ -8,8 +8,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import com.iup.tp.twitup.ihm.vue.ITwitUpView;
-import com.iup.tp.twitup.ihm.vue.TwitupMenuView;
+import com.iup.tp.twitup.ihm.vue.swing.ISwingView;
+import com.iup.tp.twitup.ihm.vue.swing.TwitupMenuView;
 /**
  * Classe de la vue principale de l'application.
  */
@@ -57,7 +57,7 @@ public class TwitupMainView{
 		
 	}
 
-	public void showView(ITwitUpView uneVue)
+	public void showView(ISwingView uneVue)
 	{
 		this.jPanel.removeAll();
 		this.jPanel.add(uneVue.showView());

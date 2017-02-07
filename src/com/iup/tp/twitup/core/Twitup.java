@@ -18,10 +18,10 @@ import com.iup.tp.twitup.events.file.IWatchableDirectory;
 import com.iup.tp.twitup.events.file.WatchableDirectory;
 import com.iup.tp.twitup.ihm.TwitupMainView;
 import com.iup.tp.twitup.ihm.TwitupMock;
-import com.iup.tp.twitup.ihm.vue.TwitupInscriptionView;
-import com.iup.tp.twitup.ihm.vue.TwitupLoginView;
-import com.iup.tp.twitup.ihm.vue.TwitupMenuView;
-import com.iup.tp.twitup.ihm.vue.TwitupUserView;
+import com.iup.tp.twitup.ihm.vue.swing.TwitupInscriptionView;
+import com.iup.tp.twitup.ihm.vue.swing.TwitupLoginView;
+import com.iup.tp.twitup.ihm.vue.swing.TwitupMenuView;
+import com.iup.tp.twitup.ihm.vue.swing.TwitupUserView;
 
 /**
  * Classe principale l'application.
