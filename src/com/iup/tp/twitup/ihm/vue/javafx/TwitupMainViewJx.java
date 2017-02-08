@@ -1,5 +1,17 @@
 package com.iup.tp.twitup.ihm.vue.javafx;
 
-public class TwitupMainViewJx implements IJavaFxView{
+import com.iup.tp.twitup.ihm.vue.IMainView;
 
+
+
+public class TwitupMainViewJx implements IMainView<IJavaFxView>{
+
+	@Override
+	public void showView(IJavaFxView view) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	
 }

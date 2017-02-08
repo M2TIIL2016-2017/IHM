@@ -7,10 +7,12 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+
+import com.iup.tp.twitup.ihm.vue.IMainView;
 /**
  * Classe de la vue principale de l'application.
  */
-public class TwitupMainViewS{
+public class TwitupMainViewS implements IMainView<ISwingView>{
 	
 	protected JFrame jframe;
 	protected JPanel jPanel;
@@ -53,22 +55,13 @@ public class TwitupMainViewS{
 		this.jframe.getContentPane().add(this.jPanel);
 		
 	}
-
-	public void showView(ISwingView uneVue)
-	{
+	
+	public void showView(ISwingView uneVue) {
 		this.jPanel.removeAll();
 		this.jPanel.add(uneVue.showView());
 		this.jPanel.revalidate();
 		this.jPanel.repaint();
-		
-		
-//		this.jframe.getContentPane().add(this.jPanel);
-		
-		
-		
 	}
-	
-
 	
 }
 

@@ -17,9 +17,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.iup.tp.twitup.controller.LoginController;
 import com.iup.tp.twitup.ihm.observers.IObserverLogin;
+import com.iup.tp.twitup.ihm.vue.ILoginView;
 
-public class TwitupLoginView implements ISwingView{
+public class TwitupLoginView implements ISwingView, ILoginView{
 	private JPanel jPanel;
 	public JPanel getjPanel() {
 		return jPanel;
@@ -29,17 +31,9 @@ public class TwitupLoginView implements ISwingView{
 	}
 	protected Set<IObserverLogin> mObservers;	
 
-	public Set<IObserverLogin> getmObservers() {
-		return mObservers;
-	}
-	
-	public void setmObservers(Set<IObserverLogin> uneListe) {
-		this.mObservers = uneListe;
-	}
-	
-	public void addmObservers(IObserverLogin unObject)
+	public void addObservers(IObserverLogin unObject)
 	{
-		this.mObservers.add(unObject);
+	
 	}
 	
 	public TwitupLoginView()
@@ -151,5 +145,10 @@ public class TwitupLoginView implements ISwingView{
 		// TODO Auto-generated method stub
 		this.jPanel.repaint();
 		return this.jPanel;
+	}
+	@Override
+	public void addObservers(LoginController unController) {
+		// TODO Auto-generated method stub
+		this.mObservers.add(unController);
 	}
 }

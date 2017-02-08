@@ -1,5 +1,5 @@
 package com.iup.tp.twitup.ihm.vue;
 
-public interface IMenuView {
+public interface IMenuView extends IView {
 
 }
