@@ -85,7 +85,6 @@ public class Twitup implements ILoginObserverController{
 			this.initLookAndFeel();
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 				| UnsupportedLookAndFeelException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

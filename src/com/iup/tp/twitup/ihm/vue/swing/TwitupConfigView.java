@@ -15,7 +15,6 @@ import com.iup.tp.twitup.ihm.Fichier1;
 public class TwitupConfigView implements ISwingView{
 
 	private JPanel jPanel;
-//	private JMenuBar menuBar;
 
 	public TwitupConfigView()
 	{
@@ -44,7 +43,6 @@ public class TwitupConfigView implements ISwingView{
 					configFile.saveConfig(configArea.getText());
 					configPanel.setVisible(false);
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -53,7 +51,6 @@ public class TwitupConfigView implements ISwingView{
 
 	@Override
 	public JComponent showView() {
-		// TODO Auto-generated method stub
 		return this.jPanel;
 	}
 	

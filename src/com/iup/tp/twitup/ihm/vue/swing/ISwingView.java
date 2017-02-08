@@ -2,7 +2,7 @@ package com.iup.tp.twitup.ihm.vue.swing;
 
 import javax.swing.JComponent;
 
-import com.iup.tp.twitup.ihm.IView;
+import com.iup.tp.twitup.ihm.vue.IView;
 
 public interface ISwingView extends IView{
 
