@@ -16,10 +16,10 @@ import com.iup.tp.twitup.datamodel.IDatabase;
 import com.iup.tp.twitup.datamodel.User;
 import com.iup.tp.twitup.events.file.IWatchableDirectory;
 import com.iup.tp.twitup.events.file.WatchableDirectory;
-import com.iup.tp.twitup.ihm.TwitupMainView;
 import com.iup.tp.twitup.ihm.TwitupMock;
 import com.iup.tp.twitup.ihm.vue.swing.TwitupInscriptionView;
 import com.iup.tp.twitup.ihm.vue.swing.TwitupLoginView;
+import com.iup.tp.twitup.ihm.vue.swing.TwitupMainViewS;
 import com.iup.tp.twitup.ihm.vue.swing.TwitupMenuView;
 import com.iup.tp.twitup.ihm.vue.swing.TwitupUserView;
 
@@ -48,7 +48,7 @@ public class Twitup implements ILoginObserverController{
 	/**
 	 * Vue principale de l'application.
 	 */
-	protected TwitupMainView mMainView;
+	protected TwitupMainViewS mMainView;
 
 	/**
 	 * Vue principale de la barre.
@@ -122,7 +122,7 @@ public class Twitup implements ILoginObserverController{
 	protected void initGui() {
 		this.mMenuView = new TwitupMenuView();
 		this.mMenuView.addmObservers(this);
-		this.mMainView = new TwitupMainView(this.mMenuView);
+		this.mMainView = new TwitupMainViewS(this.mMenuView);
 		this.loginController = new LoginController(this.mDatabase,this.mEntityManager);
 		this.loginController.addmObservers(this.mMenuView);
 		this.loginController.addmObservers(this);
