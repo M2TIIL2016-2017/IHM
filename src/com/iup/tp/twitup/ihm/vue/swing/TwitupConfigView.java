@@ -22,6 +22,7 @@ public class TwitupConfigView implements ISwingView , IConfigView{
 	private JPanel jPanel;
 	private Set<IObserverConfig> mObservers;
 
+	@Override
 	public void add(IObserverConfig unObject)
 	{
 		this.mObservers.add(unObject);
@@ -63,6 +64,11 @@ public class TwitupConfigView implements ISwingView , IConfigView{
 	@Override
 	public JComponent showView() {
 		return this.jPanel;
+	}
+	@Override
+	public void configView() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

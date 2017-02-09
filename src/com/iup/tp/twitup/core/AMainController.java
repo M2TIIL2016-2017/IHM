@@ -14,10 +14,12 @@ import com.iup.tp.twitup.datamodel.User;
 import com.iup.tp.twitup.events.file.IWatchableDirectory;
 import com.iup.tp.twitup.events.file.WatchableDirectory;
 import com.iup.tp.twitup.ihm.TwitupMock;
+import com.iup.tp.twitup.ihm.observers.IObserverConfig;
 import com.iup.tp.twitup.ihm.vue.IConfigView;
 import com.iup.tp.twitup.ihm.vue.IInscriptionView;
 import com.iup.tp.twitup.ihm.vue.ILoginView;
 import com.iup.tp.twitup.ihm.vue.IMainView;
+import com.iup.tp.twitup.ihm.vue.ITweetView;
 import com.iup.tp.twitup.ihm.vue.IView;
 import com.iup.tp.twitup.ihm.vue.swing.TwitupConfigView;
 import com.iup.tp.twitup.ihm.vue.swing.TwitupInscriptionView;
@@ -31,7 +33,7 @@ import com.iup.tp.twitup.ihm.vue.swing.TwitupUserView;
  * 
  * @author S.Lucas
  */
-public abstract class AMainController implements ILoginObserverController {
+public abstract class AMainController implements ILoginObserverController, IObserverConfig {
 	/**
 	 * Base de données.
 	 */
@@ -114,6 +116,7 @@ public abstract class AMainController implements ILoginObserverController {
 	protected void initGui() {
 		this.mMenuView = new TwitupMenuView();
 		this.mMenuView.addmObservers(this);
+		this.mMenuView.addmObserversConfig(this);
 		this.mMainView = this.createMainView(); //new TwitupMainViewS(this.mMenuView);
 		this.loginController = new LoginController(this.mDatabase, this.mEntityManager);
 		this.loginController.addmObservers(this.mMenuView);
@@ -133,6 +136,7 @@ public abstract class AMainController implements ILoginObserverController {
 	protected abstract ILoginView createLoginView();
 	protected abstract IInscriptionView createInscriptionView();
 	protected abstract IConfigView createConfigView();
+	protected abstract ITweetView createTweetView();
 
 	/**
 	 * Initialisation du répertoire d'échange (depuis la conf ou depuis un file
@@ -210,23 +214,18 @@ public abstract class AMainController implements ILoginObserverController {
 		this.mMainView.showView(loginView);
 	}
 
-	public void showConfigView() {
-		IConfigView configView =createConfigView();
-		this.mMainView.showView(configView);
-	}
 
 	@Override
-	public void connected(User unUser) {
-		if (unUser != null) {
-			System.out.println("Connected");
-			TwitupUserView userView = new TwitupUserView(unUser);
-
+	public void connected() {
+		if (this.loginController.getUnUser() != null) {
+			TwitupUserView userView = new TwitupUserView(this.loginController.getUnUser());
 			this.mMainView.showView(userView);
 		} else {
 			System.out.println("Mauvaise Identification");
 		}
 	}
 
+	
 	@Override
 	public void inscription() {
 		
@@ -246,5 +245,19 @@ public abstract class AMainController implements ILoginObserverController {
 		return this.mDatabase;
 	}
 	
+
+	@Override
+	public void configView() {
+		// TODO Auto-generated method stub
+		IConfigView configView = createConfigView();
+		configView.add(this);
+		this.mMainView.showView(configView);
+	}
 	
+	@Override
+	public void pageAccueilIsLogin()
+	{
+		
+	}
+
 }

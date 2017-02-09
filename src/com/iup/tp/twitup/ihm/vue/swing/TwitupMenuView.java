@@ -26,7 +26,7 @@ public class TwitupMenuView implements IObserverInscription, ILoginObserverContr
 	private JMenu accueilMenu;
 	private JMenu aProposMenu;
 	private JMenu optionMenu;
-	private Set<IObserverConfig> mObserversConfig;	
+	private Set<IObserverConfig> mObserversConfig = new HashSet<IObserverConfig>();	
 	protected Set<ILoginObserverController> mObservers = new HashSet<ILoginObserverController>();	
 	
 	public TwitupMenuView()
@@ -43,13 +43,11 @@ public class TwitupMenuView implements IObserverInscription, ILoginObserverContr
 		final ImageIcon icon = new ImageIcon("gland.gif");
 		
 		// Sous-Menu de fichier
-		JMenuItem sousMenuOuvrir = new JMenuItem("Ouvrir");
 		JMenuItem sousMenuQuitter = new JMenuItem("Quitter", icon);
 		JMenuItem about = new JMenuItem("?", new ImageIcon(""));
 		
 		JMenuItem configMenu = new JMenuItem("Configuration");
 		optionMenu.add(configMenu);
-		accueilMenu.add(sousMenuOuvrir);
 		accueilMenu.add(sousMenuQuitter);
 		
 		aProposMenu.add(about);
@@ -99,17 +97,12 @@ public class TwitupMenuView implements IObserverInscription, ILoginObserverContr
 		});
 		configMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				System.out.println("Config click");
 				for (IObserverConfig observer : mObserversConfig) {
 					observer.configView();
 				}
 			}
 		});
-		sousMenuOuvrir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-			}
-		});
-		
 		sousMenuQuitter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("clic quit");
@@ -131,19 +124,6 @@ public class TwitupMenuView implements IObserverInscription, ILoginObserverContr
 		return this.menuBar;
 	}
 
-	@Override
-	public void connected(User user) {
-		System.out.println("test menuBar");
-		loginMenu.setVisible(true);
-//		// TODO Auto-generated method stub
-//		JMenu loginMenu = this.menuBar.getMenu(3);
-//		loginMenu.setVisible(true);
-//		this.menuBar.remove(3);
-//		this.menuBar.add(loginMenu);
-//		this.menuBar.getParent().repaint();
-//		this.menuBar.revalidate();
-//		this.menuBar.repaint();
-	}
 
 	@Override
 	public void inscription() {
@@ -157,6 +137,10 @@ public class TwitupMenuView implements IObserverInscription, ILoginObserverContr
 		
 	}
 
+	public void addmObserversConfig(IObserverConfig unObject)
+	{
+		this.mObserversConfig.add(unObject);
+	}
 	public void addmObservers(ILoginObserverController unObject) {
 		// TODO Auto-generated method stub
 		this.mObservers.add(unObject);
@@ -164,6 +148,21 @@ public class TwitupMenuView implements IObserverInscription, ILoginObserverContr
 
 	@Override
 	public void inscription_ok() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void connected() {
+		this.loginMenu.setVisible(true);
+		accueilMenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Config click");
+				for (IObserverConfig observer : mObserversConfig) {
+					observer.pageAccueilIsLogin();
+				}
+			}
+		});
 		// TODO Auto-generated method stub
 		
 	}

@@ -14,6 +14,11 @@ import com.iup.tp.twitup.ihm.observers.IObserverLogin;
 
 public class LoginController implements IObserverLogin, IObserverInscription {
 
+	/*
+	 * Variable lié à la Session
+	 */
+	
+	protected User unUser;
 	protected EntityManager mEntityManager;
 	protected IDatabase mDatabase;
 
@@ -33,15 +38,16 @@ public class LoginController implements IObserverLogin, IObserverInscription {
 		this.mObserversInscription = new HashSet<IObserverInscription>();
 		this.mDatabase = uneDatabase;
 		this.mEntityManager = mEntityManager;
+		this.unUser = null;
 	}
 
 	@Override
 	public void sendLogin(String username, String password) {
 		// TODO Auto-generated method stub
 		System.out.println("User : " + username + "Pass : " + password);
-		User unUser = this.isLogin(username, password);
+		this.unUser = this.isLogin(username, password);
 		for (ILoginObserverController observer : mObservers) {
-			observer.connected(unUser);
+			observer.connected();
 		}
 
 	}
@@ -97,5 +103,10 @@ public class LoginController implements IObserverLogin, IObserverInscription {
 			System.out.println("Deja inscrit");
 		}
 
+	}
+
+	public User getUnUser() {
+		// TODO Auto-generated method stub
+		return this.unUser;
 	}
 }
