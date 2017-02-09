@@ -163,10 +163,7 @@ public class TwitupInscriptionView implements ISwingView , IObserverInscription 
 	
 	@Override
 	public void add(LoginController loginController) {
-		// TODO Auto-generated method stub
 		mObservers.add(loginController);
 	}
 
-	
-	
 }

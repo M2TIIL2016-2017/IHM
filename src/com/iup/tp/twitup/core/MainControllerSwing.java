@@ -11,12 +11,14 @@ import com.iup.tp.twitup.ihm.vue.IConfigView;
 import com.iup.tp.twitup.ihm.vue.IInscriptionView;
 import com.iup.tp.twitup.ihm.vue.ILoginView;
 import com.iup.tp.twitup.ihm.vue.IMainView;
+import com.iup.tp.twitup.ihm.vue.ITweetView;
 import com.iup.tp.twitup.ihm.vue.IView;
 import com.iup.tp.twitup.ihm.vue.swing.ISwingView;
 import com.iup.tp.twitup.ihm.vue.swing.TwitupConfigView;
 import com.iup.tp.twitup.ihm.vue.swing.TwitupInscriptionView;
 import com.iup.tp.twitup.ihm.vue.swing.TwitupLoginView;
 import com.iup.tp.twitup.ihm.vue.swing.TwitupMainViewS;
+import com.iup.tp.twitup.ihm.vue.swing.TwitupTweetView;
 
 public class MainControllerSwing extends AMainController {
 
@@ -48,8 +50,12 @@ public class MainControllerSwing extends AMainController {
 
 	@Override
 	protected TwitupConfigView createConfigView() {
-		// TODO Auto-generated method stub
 		return new TwitupConfigView();
+	}
+
+	@Override
+	protected TwitupTweetView createTweetView() {
+		return new TwitupTweetView();
 	}
 
 }

@@ -14,7 +14,6 @@ import javax.swing.JTextArea;
 import com.iup.tp.twitup.common.Constants;
 import com.iup.tp.twitup.ihm.Fichier1;
 import com.iup.tp.twitup.ihm.observers.IObserverConfig;
-import com.iup.tp.twitup.ihm.observers.IObserverInscription;
 import com.iup.tp.twitup.ihm.vue.IConfigView;
 
 public class TwitupConfigView implements ISwingView , IConfigView{

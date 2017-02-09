@@ -23,24 +23,13 @@ import com.iup.tp.twitup.ihm.vue.ILoginView;
 
 public class TwitupLoginView implements ISwingView, ILoginView{
 	private JPanel jPanel;
-	public JPanel getjPanel() {
-		return jPanel;
-	}
-	public void setjPanel(JPanel jPanel) {
-		this.jPanel = jPanel;
-	}
-	protected Set<IObserverLogin> mObservers;	
-
-	public void addObservers(IObserverLogin unObject)
-	{
 	
-	}
+	protected Set<IObserverLogin> mObservers;	
 	
 	public TwitupLoginView()
 	{
 		this.mObservers = new HashSet<IObserverLogin>();
 		panelView();
-		System.out.println(this.jPanel);
 	}
 	private void panelView()
 	{
