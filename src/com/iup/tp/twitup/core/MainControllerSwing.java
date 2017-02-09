@@ -7,12 +7,9 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import com.iup.tp.twitup.common.Constants;
 import com.iup.tp.twitup.common.PropertiesManager;
-import com.iup.tp.twitup.ihm.vue.ILoginView;
-import com.iup.tp.twitup.ihm.vue.IMainView;
-import com.iup.tp.twitup.ihm.vue.IView;
-import com.iup.tp.twitup.ihm.vue.swing.ISwingView;
 import com.iup.tp.twitup.ihm.vue.swing.TwitupLoginView;
 import com.iup.tp.twitup.ihm.vue.swing.TwitupMainViewS;
+import com.iup.tp.twitup.ihm.vue.swing.TwitupTweetView;
 
 public class MainControllerSwing extends AMainController {
 
@@ -23,7 +20,6 @@ public class MainControllerSwing extends AMainController {
 			UIManager.setLookAndFeel(uneProperty.getProperty(Constants.CONFIGURATION_KEY_UI_CLASS_NAME));
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 				| UnsupportedLookAndFeelException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -38,6 +34,15 @@ public class MainControllerSwing extends AMainController {
 	public TwitupLoginView createLoginView() {
 		TwitupLoginView twitupLoginView = new TwitupLoginView();
 		return twitupLoginView;
+	}
+
+	/**
+	 * Création de la vue de tweet
+	 */
+	@Override
+	protected TwitupTweetView createTweetView() {
+		TwitupTweetView twitupTweetView = new TwitupTweetView();
+		return twitupTweetView;
 	}
 
 }

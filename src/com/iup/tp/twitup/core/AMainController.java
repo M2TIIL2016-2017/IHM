@@ -6,6 +6,7 @@ import java.util.Properties;
 import com.iup.tp.twitup.common.Constants;
 import com.iup.tp.twitup.common.PropertiesManager;
 import com.iup.tp.twitup.controller.LoginController;
+import com.iup.tp.twitup.controller.TweetController;
 import com.iup.tp.twitup.controller.observers.ILoginObserverController;
 import com.iup.tp.twitup.datamodel.Database;
 import com.iup.tp.twitup.datamodel.DatabaseObserver;
@@ -16,10 +17,9 @@ import com.iup.tp.twitup.events.file.WatchableDirectory;
 import com.iup.tp.twitup.ihm.TwitupMock;
 import com.iup.tp.twitup.ihm.vue.ILoginView;
 import com.iup.tp.twitup.ihm.vue.IMainView;
+import com.iup.tp.twitup.ihm.vue.ITweetView;
 import com.iup.tp.twitup.ihm.vue.IView;
 import com.iup.tp.twitup.ihm.vue.swing.TwitupInscriptionView;
-import com.iup.tp.twitup.ihm.vue.swing.TwitupLoginView;
-import com.iup.tp.twitup.ihm.vue.swing.TwitupMainViewS;
 import com.iup.tp.twitup.ihm.vue.swing.TwitupMenuView;
 import com.iup.tp.twitup.ihm.vue.swing.TwitupUserView;
 
@@ -77,6 +77,11 @@ public abstract class AMainController implements ILoginObserverController {
 	 * Controller de login
 	 */
 	protected LoginController loginController;
+	
+	/**
+	 * Controller de tweet
+	 */
+	protected TweetController tweetController;
 
 	/**
 	 * Constructeur.
@@ -126,8 +131,16 @@ public abstract class AMainController implements ILoginObserverController {
 		// this.mMainView. Ajouter le login Controller
 	}
 
+	/**
+	 * Déclaration des vues 
+	 */
 	protected abstract IMainView createMainView();
-	public abstract ILoginView createLoginView();
+	
+	protected abstract ILoginView createLoginView();
+	
+	protected abstract ITweetView createTweetView();
+	
+//	protected abstract ITweetView createTweetView();
 
 	/**
 	 * Initialisation du répertoire d'échange (depuis la conf ou depuis un file
@@ -241,3 +254,4 @@ public abstract class AMainController implements ILoginObserverController {
 	
 	
 }
+
