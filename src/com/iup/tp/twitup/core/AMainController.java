@@ -14,10 +14,12 @@ import com.iup.tp.twitup.datamodel.User;
 import com.iup.tp.twitup.events.file.IWatchableDirectory;
 import com.iup.tp.twitup.events.file.WatchableDirectory;
 import com.iup.tp.twitup.ihm.TwitupMock;
+import com.iup.tp.twitup.ihm.vue.IConfigView;
 import com.iup.tp.twitup.ihm.vue.IInscriptionView;
 import com.iup.tp.twitup.ihm.vue.ILoginView;
 import com.iup.tp.twitup.ihm.vue.IMainView;
 import com.iup.tp.twitup.ihm.vue.IView;
+import com.iup.tp.twitup.ihm.vue.swing.TwitupConfigView;
 import com.iup.tp.twitup.ihm.vue.swing.TwitupInscriptionView;
 import com.iup.tp.twitup.ihm.vue.swing.TwitupLoginView;
 import com.iup.tp.twitup.ihm.vue.swing.TwitupMainViewS;
@@ -130,6 +132,7 @@ public abstract class AMainController implements ILoginObserverController {
 	protected abstract IMainView createMainView();
 	protected abstract ILoginView createLoginView();
 	protected abstract IInscriptionView createInscriptionView();
+	protected abstract IConfigView createConfigView();
 
 	/**
 	 * Initialisation du répertoire d'échange (depuis la conf ou depuis un file
@@ -208,8 +211,8 @@ public abstract class AMainController implements ILoginObserverController {
 	}
 
 	public void showConfigView() {
-		// TwitupConfigView configView = new TwitupConfigView();
-		// this.mMainView.setjPanel(configView.getjPanel());
+		IConfigView configView =createConfigView();
+		this.mMainView.showView(configView);
 	}
 
 	@Override

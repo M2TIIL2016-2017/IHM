@@ -15,6 +15,7 @@ import javax.swing.JMenuItem;
 import com.iup.tp.twitup.controller.observers.ILoginObserverController;
 import com.iup.tp.twitup.datamodel.User;
 import com.iup.tp.twitup.ihm.Message;
+import com.iup.tp.twitup.ihm.observers.IObserverConfig;
 import com.iup.tp.twitup.ihm.observers.IObserverInscription;
 
 public class TwitupMenuView implements IObserverInscription, ILoginObserverController{
@@ -25,6 +26,7 @@ public class TwitupMenuView implements IObserverInscription, ILoginObserverContr
 	private JMenu accueilMenu;
 	private JMenu aProposMenu;
 	private JMenu optionMenu;
+	private Set<IObserverConfig> mObserversConfig;	
 	protected Set<ILoginObserverController> mObservers = new HashSet<ILoginObserverController>();	
 	
 	public TwitupMenuView()
@@ -97,6 +99,9 @@ public class TwitupMenuView implements IObserverInscription, ILoginObserverContr
 		});
 		configMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				for (IObserverConfig observer : mObserversConfig) {
+					observer.configView();
+				}
 			}
 		});
 		sousMenuOuvrir.addActionListener(new ActionListener() {
