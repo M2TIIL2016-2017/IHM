@@ -17,19 +17,18 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.iup.tp.twitup.controller.LoginController;
 import com.iup.tp.twitup.ihm.observers.IObserverInscription;
+import com.iup.tp.twitup.ihm.vue.IInscriptionView;
 
-public class TwitupInscriptionView implements ISwingView , IObserverInscription{
+public class TwitupInscriptionView implements ISwingView , IObserverInscription , IInscriptionView{
 
 	private JPanel jPanel;
 //	private JMenuBar menuBar;
 	private Set<IObserverInscription> mObservers;
 
 	
-	public void add(IObserverInscription unObject)
-	{
-		mObservers.add(unObject);
-	}
+
 	public TwitupInscriptionView()
 	{
 		this.mObservers = new HashSet<IObserverInscription>();
@@ -161,7 +160,11 @@ public class TwitupInscriptionView implements ISwingView , IObserverInscription{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
+	public void add(LoginController loginController) {
+		// TODO Auto-generated method stub
+		mObservers.add(loginController);
+	}
 
-	
-	
 }

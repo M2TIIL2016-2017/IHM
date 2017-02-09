@@ -15,6 +15,8 @@ import com.iup.tp.twitup.datamodel.User;
 import com.iup.tp.twitup.events.file.IWatchableDirectory;
 import com.iup.tp.twitup.events.file.WatchableDirectory;
 import com.iup.tp.twitup.ihm.TwitupMock;
+import com.iup.tp.twitup.ihm.vue.IConfigView;
+import com.iup.tp.twitup.ihm.vue.IInscriptionView;
 import com.iup.tp.twitup.ihm.vue.ILoginView;
 import com.iup.tp.twitup.ihm.vue.IMainView;
 import com.iup.tp.twitup.ihm.vue.ITweetView;
@@ -138,6 +140,10 @@ public abstract class AMainController implements ILoginObserverController {
 	
 	protected abstract ILoginView createLoginView();
 	
+	protected abstract IInscriptionView createInscriptionView();
+	
+	protected abstract IConfigView createConfigView();
+	
 	protected abstract ITweetView createTweetView();
 	
 //	protected abstract ITweetView createTweetView();
@@ -254,4 +260,3 @@ public abstract class AMainController implements ILoginObserverController {
 	
 	
 }
-

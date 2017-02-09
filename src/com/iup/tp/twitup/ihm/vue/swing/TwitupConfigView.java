@@ -3,6 +3,8 @@ package com.iup.tp.twitup.ihm.vue.swing;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -11,13 +13,21 @@ import javax.swing.JTextArea;
 
 import com.iup.tp.twitup.common.Constants;
 import com.iup.tp.twitup.ihm.Fichier1;
+import com.iup.tp.twitup.ihm.observers.IObserverConfig;
+import com.iup.tp.twitup.ihm.vue.IConfigView;
 
-public class TwitupConfigView implements ISwingView{
+public class TwitupConfigView implements ISwingView , IConfigView{
 
 	private JPanel jPanel;
+	private Set<IObserverConfig> mObservers;
 
+	public void add(IObserverConfig unObject)
+	{
+		this.mObservers.add(unObject);
+	}
 	public TwitupConfigView()
 	{
+		this.mObservers = new HashSet<IObserverConfig>();
 		panelView();
 	}
 
