@@ -7,10 +7,12 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import com.iup.tp.twitup.common.Constants;
 import com.iup.tp.twitup.common.PropertiesManager;
+import com.iup.tp.twitup.ihm.vue.IInscriptionView;
 import com.iup.tp.twitup.ihm.vue.ILoginView;
 import com.iup.tp.twitup.ihm.vue.IMainView;
 import com.iup.tp.twitup.ihm.vue.IView;
 import com.iup.tp.twitup.ihm.vue.swing.ISwingView;
+import com.iup.tp.twitup.ihm.vue.swing.TwitupInscriptionView;
 import com.iup.tp.twitup.ihm.vue.swing.TwitupLoginView;
 import com.iup.tp.twitup.ihm.vue.swing.TwitupMainViewS;
 
@@ -38,6 +40,12 @@ public class MainControllerSwing extends AMainController {
 	public TwitupLoginView createLoginView() {
 		TwitupLoginView twitupLoginView = new TwitupLoginView();
 		return twitupLoginView;
+	}
+
+	@Override
+	protected TwitupInscriptionView createInscriptionView() {
+		TwitupInscriptionView uneVue = new TwitupInscriptionView();
+		return uneVue;
 	}
 
 }

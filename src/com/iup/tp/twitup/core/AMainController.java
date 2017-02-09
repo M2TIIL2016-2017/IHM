@@ -14,6 +14,7 @@ import com.iup.tp.twitup.datamodel.User;
 import com.iup.tp.twitup.events.file.IWatchableDirectory;
 import com.iup.tp.twitup.events.file.WatchableDirectory;
 import com.iup.tp.twitup.ihm.TwitupMock;
+import com.iup.tp.twitup.ihm.vue.IInscriptionView;
 import com.iup.tp.twitup.ihm.vue.ILoginView;
 import com.iup.tp.twitup.ihm.vue.IMainView;
 import com.iup.tp.twitup.ihm.vue.IView;
@@ -127,7 +128,8 @@ public abstract class AMainController implements ILoginObserverController {
 	}
 
 	protected abstract IMainView createMainView();
-	public abstract ILoginView createLoginView();
+	protected abstract ILoginView createLoginView();
+	protected abstract IInscriptionView createInscriptionView();
 
 	/**
 	 * Initialisation du répertoire d'échange (depuis la conf ou depuis un file
@@ -224,12 +226,14 @@ public abstract class AMainController implements ILoginObserverController {
 
 	@Override
 	public void inscription() {
-		TwitupInscriptionView inscriptionView = new TwitupInscriptionView();
+		
+		IInscriptionView  inscriptionView = createInscriptionView();
 		this.loginController.addmObserversInscription(inscriptionView);
 		inscriptionView.add(loginController);
 		this.mMainView.showView(inscriptionView);
 	}
 
+	
 	@Override
 	public void inscription_ok() {
 
