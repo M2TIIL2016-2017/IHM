@@ -50,6 +50,11 @@ public class TweetController implements IObserverTweet{
 		return null;
 	}
 	
+	/**
+	 * Fonction qui vérifie que le tweet est valide
+	 * @param messageTweet
+	 * @return
+	 */
 	public boolean isValideTweet(String messageTweet) {
 		String messageErreur = "";
 		
@@ -65,6 +70,9 @@ public class TweetController implements IObserverTweet{
 		return true;
 	}
 
+	/**
+	 * Message d'ajout d'un tweet
+	 */
 	@Override
 	public void sendTweet(User userTag, String tweet) {
 		if(isValideTweet(tweet)){
