@@ -7,13 +7,6 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import com.iup.tp.twitup.common.Constants;
 import com.iup.tp.twitup.common.PropertiesManager;
-import com.iup.tp.twitup.ihm.vue.IConfigView;
-import com.iup.tp.twitup.ihm.vue.IInscriptionView;
-import com.iup.tp.twitup.ihm.vue.ILoginView;
-import com.iup.tp.twitup.ihm.vue.IMainView;
-import com.iup.tp.twitup.ihm.vue.ITweetView;
-import com.iup.tp.twitup.ihm.vue.IView;
-import com.iup.tp.twitup.ihm.vue.swing.ISwingView;
 import com.iup.tp.twitup.ihm.vue.swing.TwitupConfigView;
 import com.iup.tp.twitup.ihm.vue.swing.TwitupInscriptionView;
 import com.iup.tp.twitup.ihm.vue.swing.TwitupLoginView;

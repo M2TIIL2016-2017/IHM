@@ -43,7 +43,6 @@ public class LoginController implements IObserverLogin, IObserverInscription {
 
 	@Override
 	public void sendLogin(String username, String password) {
-		// TODO Auto-generated method stub
 		System.out.println("User : " + username + "Pass : " + password);
 		this.unUser = this.isLogin(username, password);
 		for (ILoginObserverController observer : mObservers) {
@@ -92,7 +91,6 @@ public class LoginController implements IObserverLogin, IObserverInscription {
 
 	@Override
 	public void sendInscription(String userTag, String username, String password) {
-		// TODO Auto-generated method stub
 		System.out.println("Send Inscription - Controller");
 		if (!inscriptionDoublon(userTag)) {
 
@@ -106,7 +104,6 @@ public class LoginController implements IObserverLogin, IObserverInscription {
 	}
 
 	public User getUnUser() {
-		// TODO Auto-generated method stub
 		return this.unUser;
 	}
 }
