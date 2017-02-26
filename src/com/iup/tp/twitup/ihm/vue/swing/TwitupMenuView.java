@@ -26,6 +26,7 @@ public class TwitupMenuView implements IObserverInscription, ILoginObserverContr
 	private JMenu accueilMenu;
 	private JMenu aProposMenu;
 	private JMenu optionMenu;
+	private JMenu logoutMenu;
 	private Set<IObserverConfig> mObserversConfig = new HashSet<IObserverConfig>();	
 	protected Set<ILoginObserverController> mObservers = new HashSet<ILoginObserverController>();	
 	
@@ -37,8 +38,10 @@ public class TwitupMenuView implements IObserverInscription, ILoginObserverContr
 		this.aProposMenu = new JMenu("A propos");
 		this.optionMenu = new JMenu("Options");
 		this.loginMenu = new JMenu("Mon Compte");
+		this.logoutMenu = new JMenu("Déconnexion");
 		this.inscriptionMenu = new JMenu("Inscription");
 		this.loginMenu.setVisible(false);
+		this.logoutMenu.setVisible(false);
 		
 		final ImageIcon icon = new ImageIcon("gland.gif");
 		
@@ -49,13 +52,13 @@ public class TwitupMenuView implements IObserverInscription, ILoginObserverContr
 		JMenuItem configMenu = new JMenuItem("Configuration");
 		optionMenu.add(configMenu);
 		accueilMenu.add(sousMenuQuitter);
-		
 		aProposMenu.add(about);
 		
 		this.menuBar.add(accueilMenu);
 		this.menuBar.add(aProposMenu);
 		this.menuBar.add(optionMenu);
 		this.menuBar.add(loginMenu);
+		this.menuBar.add(logoutMenu);
 		this.menuBar.add(inscriptionMenu);
 		
 		inscriptionMenu.addMouseListener(new MouseListener() {
@@ -117,6 +120,47 @@ public class TwitupMenuView implements IObserverInscription, ILoginObserverContr
 				msg.afficher_msg_info();
 			}
 		});
+		
+		logoutMenu.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				loginMenu.setVisible(false);
+				logoutMenu.setVisible(false);
+				
+				// TODO Auto-generated method stub
+				System.out.println("Config click");
+				for (IObserverConfig observer : mObserversConfig) {
+					observer.pageAccueilIsDeconnected();
+				}
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+		});
+		
 	}
 	
 	public JMenuBar getMenuBar() {
@@ -155,6 +199,8 @@ public class TwitupMenuView implements IObserverInscription, ILoginObserverContr
 	@Override
 	public void connected() {
 		this.loginMenu.setVisible(true);
+		this.logoutMenu.setVisible(true);
+		this.inscriptionMenu.setVisible(false);
 		accueilMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Config click");

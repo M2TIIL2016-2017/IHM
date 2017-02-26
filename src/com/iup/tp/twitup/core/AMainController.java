@@ -39,6 +39,7 @@ public abstract class AMainController implements ILoginObserverController, IObse
 	 */
 	protected IDatabase mDatabase;
 
+	
 	/**
 	 * Gestionnaire des entités contenu de la base de données.
 	 */
@@ -54,6 +55,7 @@ public abstract class AMainController implements ILoginObserverController, IObse
 	 */
 	protected TwitupMenuView mMenuView;
 
+	protected User loginConnected;
 	/**
 	 * Classe de surveillance de répertoire
 	 */
@@ -83,6 +85,14 @@ public abstract class AMainController implements ILoginObserverController, IObse
 	 */
 	protected LoginController loginController;
 
+	
+	/**
+	 * Utilisateur
+	 * 
+	 */
+	protected User unUser;
+	
+	
 	/**
 	 * Constructeur.
 	 */
@@ -114,6 +124,8 @@ public abstract class AMainController implements ILoginObserverController, IObse
 	 * Initialisation de l'interface graphique.
 	 */
 	protected void initGui() {
+		this.unUser = null;
+		this.loginConnected = null;
 		this.mMenuView = new TwitupMenuView();
 		this.mMenuView.addmObservers(this);
 		this.mMenuView.addmObserversConfig(this);
@@ -214,11 +226,13 @@ public abstract class AMainController implements ILoginObserverController, IObse
 		this.mMainView.showView(loginView);
 	}
 
-
 	@Override
 	public void connected() {
-		if (this.loginController.getUnUser() != null) {
-			TwitupUserView userView = new TwitupUserView(this.loginController.getUnUser());
+		
+		
+		if (this.loginController.getUnUser() != null && this.unUser == null) {
+			this.unUser = this.loginController.getUnUser();
+			TwitupUserView userView = new TwitupUserView(this.unUser);
 			this.mMainView.showView(userView);
 		} else {
 			System.out.println("Mauvaise Identification");
@@ -248,7 +262,7 @@ public abstract class AMainController implements ILoginObserverController, IObse
 
 	@Override
 	public void configView() {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub  
 		IConfigView configView = createConfigView();
 		configView.add(this);
 		this.mMainView.showView(configView);
@@ -260,4 +274,13 @@ public abstract class AMainController implements ILoginObserverController, IObse
 		
 	}
 
+	@Override 
+	public void pageAccueilIsDeconnected()
+	{
+		if(this.unUser != null)
+		{
+			this.unUser = null;
+			this.showLoginView(this.loginController);
+		}
+	}
 }
