@@ -8,6 +8,7 @@ import java.util.Set;
 import com.iup.tp.twitup.common.Constants;
 import com.iup.tp.twitup.common.PropertiesManager;
 import com.iup.tp.twitup.controller.LoginController;
+import com.iup.tp.twitup.controller.TweetController;
 import com.iup.tp.twitup.controller.observers.ILoginObserverController;
 import com.iup.tp.twitup.datamodel.Database;
 import com.iup.tp.twitup.datamodel.DatabaseObserver;
@@ -98,6 +99,11 @@ public abstract class AMainController implements ILoginObserverController, IObse
 	 */
 	protected User unUser;
 	
+	
+	/**
+	 * Controller de tweet
+	 */
+	protected TweetController tweetController;
 	
 	/**
 	 * Constructeur.
@@ -277,8 +283,7 @@ public abstract class AMainController implements ILoginObserverController, IObse
 	}
 	
 	@Override
-	public void pageAccueilIsLogin()
-	{
+	public void pageAccueilIsLogin() {
 	}
 
 	@Override 

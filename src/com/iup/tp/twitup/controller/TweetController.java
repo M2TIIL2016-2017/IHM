@@ -8,6 +8,7 @@ import com.iup.tp.twitup.controller.observers.ITweetObserverController;
 import com.iup.tp.twitup.core.EntityManager;
 import com.iup.tp.twitup.datamodel.IDatabase;
 import com.iup.tp.twitup.datamodel.Twit;
+import com.iup.tp.twitup.datamodel.User;
 import com.iup.tp.twitup.ihm.observers.IObserverTweet;
 
 public class TweetController implements IObserverTweet{
@@ -26,18 +27,6 @@ public class TweetController implements IObserverTweet{
 		this.mObservers = new HashSet<ITweetObserverController>();
 		this.mDatabase = database;
 		this.mEntityManager = mEntityManager;
-	}
-	
-	@Override
-	public void sendTweet(String userTag, String tweet) {
-		// TODO Auto-generated method stub
-		
-		System.out.println("User : " + userTag + " Tweet : " + tweet);
-		Twit unTweet = this.isValide(userTag, tweet);
-		for(ITweetObserverController tweetObserverController : mObservers){
-			tweetObserverController.newTweet(unTweet);
-		}
-		
 	}
 	
 	/**
@@ -60,10 +49,39 @@ public class TweetController implements IObserverTweet{
 		}
 		return null;
 	}
+	
+	/**
+	 * Fonction qui vérifie que le tweet est valide
+	 * @param messageTweet
+	 * @return
+	 */
+	public boolean isValideTweet(String messageTweet) {
+		String messageErreur = "";
+		
+		if(messageTweet == null || messageTweet.length() == 0){
+			messageErreur += "Renseigner le tweet ! \n";
+		} else if(messageTweet.length() >= 150){
+			messageErreur += "Le tweet dépasse les 150 caractères !";
+		}
+		if(messageErreur.length() > 0){
+			return false;
+		}
+		
+		return true;
+	}
 
+	/**
+	 * Message d'ajout d'un tweet
+	 */
 	@Override
-	public void deabonner(String userTag) {
-		// TODO Auto-generated method stub
+	public void sendTweet(User userTag, String tweet) {
+		if(isValideTweet(tweet)){
+			System.out.println("Envoi Tweet - Controller");
+			Twit unTwit = new Twit(userTag, tweet);
+			this.mDatabase.addTwit(unTwit);
+			this.mEntityManager.sendTwit(unTwit);
+		}
+
 		
 	}
 }
