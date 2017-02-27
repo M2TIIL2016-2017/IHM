@@ -1,7 +1,9 @@
 package com.iup.tp.twitup.core;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Properties;
+import java.util.Set;
 
 import com.iup.tp.twitup.common.Constants;
 import com.iup.tp.twitup.common.PropertiesManager;
@@ -10,19 +12,23 @@ import com.iup.tp.twitup.controller.observers.ILoginObserverController;
 import com.iup.tp.twitup.datamodel.Database;
 import com.iup.tp.twitup.datamodel.DatabaseObserver;
 import com.iup.tp.twitup.datamodel.IDatabase;
+import com.iup.tp.twitup.datamodel.Twit;
 import com.iup.tp.twitup.datamodel.User;
 import com.iup.tp.twitup.events.file.IWatchableDirectory;
 import com.iup.tp.twitup.events.file.WatchableDirectory;
 import com.iup.tp.twitup.ihm.TwitupMock;
 import com.iup.tp.twitup.ihm.observers.IObserverConfig;
+import com.iup.tp.twitup.ihm.observers.IObserverLogin;
 import com.iup.tp.twitup.ihm.vue.IConfigView;
 import com.iup.tp.twitup.ihm.vue.IInscriptionView;
+import com.iup.tp.twitup.ihm.vue.IListTweetView;
 import com.iup.tp.twitup.ihm.vue.ILoginView;
 import com.iup.tp.twitup.ihm.vue.IMainView;
 import com.iup.tp.twitup.ihm.vue.ITweetView;
 import com.iup.tp.twitup.ihm.vue.IView;
 import com.iup.tp.twitup.ihm.vue.swing.TwitupConfigView;
 import com.iup.tp.twitup.ihm.vue.swing.TwitupInscriptionView;
+import com.iup.tp.twitup.ihm.vue.swing.TwitupListTwitView;
 import com.iup.tp.twitup.ihm.vue.swing.TwitupLoginView;
 import com.iup.tp.twitup.ihm.vue.swing.TwitupMainViewS;
 import com.iup.tp.twitup.ihm.vue.swing.TwitupMenuView;
@@ -33,7 +39,7 @@ import com.iup.tp.twitup.ihm.vue.swing.TwitupUserView;
  * 
  * @author S.Lucas
  */
-public abstract class AMainController implements ILoginObserverController, IObserverConfig {
+public abstract class AMainController implements ILoginObserverController, IObserverLogin, IObserverConfig {
 	/**
 	 * Base de données.
 	 */
@@ -149,6 +155,7 @@ public abstract class AMainController implements ILoginObserverController, IObse
 	protected abstract IInscriptionView createInscriptionView();
 	protected abstract IConfigView createConfigView();
 	protected abstract ITweetView createTweetView();
+	protected abstract IListTweetView createListTweetView(Set<Twit> set);
 
 	/**
 	 * Initialisation du répertoire d'échange (depuis la conf ou depuis un file
@@ -229,11 +236,12 @@ public abstract class AMainController implements ILoginObserverController, IObse
 	@Override
 	public void connected() {
 		
-		
 		if (this.loginController.getUnUser() != null && this.unUser == null) {
 			this.unUser = this.loginController.getUnUser();
-			TwitupUserView userView = new TwitupUserView(this.unUser);
-			this.mMainView.showView(userView);
+			IListTweetView listView = createListTweetView(this.mDatabase.getTwits());
+			System.out.println(this.mDatabase.getTwits());
+			//listView.setLstTwit(this.mDatabase.getTwitsWithUserTag(this.unUser.getUserTag()));
+			this.mMainView.showView(listView);
 		} else {
 			System.out.println("Mauvaise Identification");
 		}
@@ -271,7 +279,6 @@ public abstract class AMainController implements ILoginObserverController, IObse
 	@Override
 	public void pageAccueilIsLogin()
 	{
-		
 	}
 
 	@Override 
@@ -279,8 +286,15 @@ public abstract class AMainController implements ILoginObserverController, IObse
 	{
 		if(this.unUser != null)
 		{
+			System.out.println("Déconnexion");
 			this.unUser = null;
 			this.showLoginView(this.loginController);
 		}
 	}
+
+	protected TwitupListTwitView createListTweetView() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

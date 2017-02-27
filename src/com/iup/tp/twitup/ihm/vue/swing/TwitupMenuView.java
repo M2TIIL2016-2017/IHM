@@ -17,6 +17,7 @@ import com.iup.tp.twitup.datamodel.User;
 import com.iup.tp.twitup.ihm.Message;
 import com.iup.tp.twitup.ihm.observers.IObserverConfig;
 import com.iup.tp.twitup.ihm.observers.IObserverInscription;
+import com.iup.tp.twitup.ihm.observers.IObserverLogin;
 
 public class TwitupMenuView implements IObserverInscription, ILoginObserverController{
 
@@ -28,6 +29,7 @@ public class TwitupMenuView implements IObserverInscription, ILoginObserverContr
 	private JMenu optionMenu;
 	private JMenu logoutMenu;
 	private Set<IObserverConfig> mObserversConfig = new HashSet<IObserverConfig>();	
+	private Set<IObserverLogin> mObserversLogin = new HashSet<IObserverLogin>();	
 	protected Set<ILoginObserverController> mObservers = new HashSet<ILoginObserverController>();	
 	
 	public TwitupMenuView()
@@ -45,13 +47,10 @@ public class TwitupMenuView implements IObserverInscription, ILoginObserverContr
 		
 		final ImageIcon icon = new ImageIcon("gland.gif");
 		
-		// Sous-Menu de fichier
-		JMenuItem sousMenuQuitter = new JMenuItem("Quitter", icon);
 		JMenuItem about = new JMenuItem("?", new ImageIcon(""));
 		
 		JMenuItem configMenu = new JMenuItem("Configuration");
 		optionMenu.add(configMenu);
-		accueilMenu.add(sousMenuQuitter);
 		aProposMenu.add(about);
 		
 		this.menuBar.add(accueilMenu);
@@ -106,12 +105,6 @@ public class TwitupMenuView implements IObserverInscription, ILoginObserverContr
 				}
 			}
 		});
-		sousMenuQuitter.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("clic quit");
-				System.exit(0);
-			}
-		});
 		
 		about.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -130,7 +123,7 @@ public class TwitupMenuView implements IObserverInscription, ILoginObserverContr
 				
 				// TODO Auto-generated method stub
 				System.out.println("Config click");
-				for (IObserverConfig observer : mObserversConfig) {
+				for (IObserverLogin observer : mObserversLogin) {
 					observer.pageAccueilIsDeconnected();
 				}
 			}
@@ -160,7 +153,37 @@ public class TwitupMenuView implements IObserverInscription, ILoginObserverContr
 			}
 
 		});
-		
+		accueilMenu.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}});
 	}
 	
 	public JMenuBar getMenuBar() {
@@ -204,7 +227,7 @@ public class TwitupMenuView implements IObserverInscription, ILoginObserverContr
 		accueilMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Config click");
-				for (IObserverConfig observer : mObserversConfig) {
+				for (IObserverLogin observer : mObserversLogin) {
 					observer.pageAccueilIsLogin();
 				}
 			}

@@ -109,4 +109,16 @@ public class LoginController implements IObserverLogin, IObserverInscription {
 		// TODO Auto-generated method stub
 		return this.unUser;
 	}
+
+	@Override
+	public void pageAccueilIsLogin() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void pageAccueilIsDeconnected() {
+		// TODO Auto-generated method stub
+		
+	}
 }

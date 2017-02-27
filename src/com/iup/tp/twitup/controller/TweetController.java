@@ -60,4 +60,10 @@ public class TweetController implements IObserverTweet{
 		}
 		return null;
 	}
+
+	@Override
+	public void deabonner(String userTag) {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
+import com.iup.tp.twitup.datamodel.Twit;
 import com.iup.tp.twitup.ihm.observers.IObserverTweet;
 import com.iup.tp.twitup.ihm.vue.ITweetView;
 
@@ -42,6 +43,13 @@ public class TwitupTweetView implements ISwingView, ITweetView {
 
 	@Override
 	public void sendTweet(String userTag, String tweet) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void deabonner(String userTag) {
 		// TODO Auto-generated method stub
 		
 	}

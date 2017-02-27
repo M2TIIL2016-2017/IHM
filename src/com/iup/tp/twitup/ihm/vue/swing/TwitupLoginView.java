@@ -38,9 +38,9 @@ public class TwitupLoginView implements ISwingView, ILoginView{
 
 		JLabel connexionLabel= new JLabel("Connexion");
 		JLabel userLabel = new JLabel("Nom utilisateur : ");
-		JTextField userTf = new JTextField();
+		JTextField userTf = new JTextField("Toto");
 		JLabel passwordLabel = new JLabel("Mot de passe : ");
-		JTextField passwordTf = new JTextField();
+		JTextField passwordTf = new JTextField("Toto2");
 		JButton helpBttn = new JButton("Help");
 		JButton okBttn = new JButton("OK");
 
