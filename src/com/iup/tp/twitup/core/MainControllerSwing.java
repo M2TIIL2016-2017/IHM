@@ -69,7 +69,7 @@ public class MainControllerSwing extends AMainController {
 	
 
 	@Override
-	public void sendLogin(String username, String password) {
+	public void sendLogin(String username,  char[] password) {
 		// TODO Auto-generated method stub
 		
 	}

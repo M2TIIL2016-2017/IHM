@@ -1,5 +1,6 @@
 package com.iup.tp.twitup.controller;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -42,7 +43,7 @@ public class LoginController implements IObserverLogin, IObserverInscription {
 	}
 
 	@Override
-	public void sendLogin(String username, String password) {
+	public void sendLogin(String username, char[] password) {
 		System.out.println("User : " + username + "Pass : " + password);
 		this.unUser = this.isLogin(username, password);
 		for (ILoginObserverController observer : mObservers) {
@@ -58,17 +59,15 @@ public class LoginController implements IObserverLogin, IObserverInscription {
 		}
 	}
 
-	public User isLogin(String username, String password) {
+	public User isLogin(String username, char[] password) {
 
 		Iterator<User> iterator = this.mDatabase.getUsers().iterator();
 		System.out.println(this.mDatabase.getUsers());
 		while (iterator.hasNext()) {
 			User unUser = (User) iterator.next();
-			if (unUser.getUserTag().equals(username) == true) {
-				System.out.println(unUser.getName() + unUser.getUserPassword());
-				if (unUser.getUserPassword().equals(password) == true) {
-					return unUser;
-				}
+			char[] userPwd = unUser.getUserPassword().toCharArray();
+			if (unUser.getUserTag().equals(username) && Arrays.equals(password, userPwd)) {
+				return unUser;
 			}
 			// do something to object;
 		}

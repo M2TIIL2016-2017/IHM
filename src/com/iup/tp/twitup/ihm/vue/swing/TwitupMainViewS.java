@@ -5,7 +5,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
-import javax.swing.JComponent;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
@@ -50,6 +50,8 @@ public class TwitupMainViewS implements IMainView<ISwingView>{
 		// Création de la fenetre
 		System.out.println("test");
 		this.jframe = new JFrame("twitUP");
+		ImageIcon logo = new ImageIcon("./src/resources/images/logo-twitter-rond.png");
+		this.jframe.setIconImage(logo.getImage());
 		this.jframe.setSize(500, 500);
 		this.jframe.setLayout(new GridBagLayout());
 		this.jframe.setJMenuBar(uneBarre.getMenuBar());

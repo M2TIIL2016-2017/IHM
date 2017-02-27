@@ -259,8 +259,7 @@ public abstract class AMainController implements ILoginObserverController, IObse
 			TwitSearchComponentSwing unTwitSearchComponentSwing = new TwitSearchComponentSwing();
 			unTwitSearchComponentSwing.setController(this.tweetController);
 			
-			this.tweetController.searchTwits("fictif");
-			System.out.println(this.tweetController.twitList());
+			this.tweetController.load();
 			
 			TwitAddComponentSwing unTwitAdd = new TwitAddComponentSwing();
 			unTwitAdd.setController(this.tweetController, this.unUser);

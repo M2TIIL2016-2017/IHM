@@ -225,5 +225,9 @@ public class TweetController implements IObserverTweet, ITweetObserverController
 		
 	}
 
+	public void load()
+	{
+		this.searchTwits("");
+	}
 	
 }

@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import com.iup.tp.twitup.controller.LoginController;
@@ -40,7 +41,7 @@ public class TwitupLoginView implements ISwingView, ILoginView{
 		JLabel userLabel = new JLabel("Nom utilisateur : ");
 		JTextField userTf = new JTextField("Toto");
 		JLabel passwordLabel = new JLabel("Mot de passe : ");
-		JTextField passwordTf = new JTextField("Toto2");
+		JPasswordField passwordTf = new JPasswordField("Toto2");
 		JButton helpBttn = new JButton("Help");
 		JButton okBttn = new JButton("OK");
 
@@ -88,7 +89,7 @@ public class TwitupLoginView implements ISwingView, ILoginView{
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Click");
 				String username = userTf.getText();
-				String password = passwordTf.getText();
+				char[] password = passwordTf.getPassword();
 				for (IObserverLogin observer : mObservers) {
 					observer.sendLogin(username,password);
 				}
