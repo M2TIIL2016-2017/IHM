@@ -158,7 +158,7 @@ public class TwitupAccueilView implements ISwingView , IObserverInscription{
 	}
 
 	@Override
-	public void sendInscription(String userTag, String username, String password) {
+	public void sendInscription(String userTag, String username, char[] password) {
 		// TODO Auto-generated method stub
 		
 	}

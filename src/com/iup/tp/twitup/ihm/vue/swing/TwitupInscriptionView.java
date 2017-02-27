@@ -6,6 +6,9 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,10 +18,12 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import com.iup.tp.twitup.controller.LoginController;
 import com.iup.tp.twitup.ihm.observers.IObserverInscription;
+import com.iup.tp.twitup.ihm.observers.IObserverLogin;
 import com.iup.tp.twitup.ihm.vue.IInscriptionView;
 
 public class TwitupInscriptionView implements ISwingView , IObserverInscription , IInscriptionView{
@@ -56,10 +61,10 @@ public class TwitupInscriptionView implements ISwingView , IObserverInscription 
 		JTextField userTagTf = new JTextField();
 		
 		JLabel passwordLabel = new JLabel("Mot de passe : ");
-		JTextField passwordTf = new JTextField();
+		JPasswordField passwordTf = new JPasswordField();
 		
 		JLabel confimPasswordLabel = new JLabel("Confirmation Mot de passe : ");
-		JTextField confimPasswordTf = new JTextField();
+		JPasswordField confimPasswordTf = new JPasswordField();
 		
 		
 		JButton helpBttn = new JButton("Help");
@@ -132,15 +137,50 @@ public class TwitupInscriptionView implements ISwingView , IObserverInscription 
 		buttonBox.add(okBttn);
 		this.jPanel.add(buttonBox, constraints);
 
-		okBttn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(passwordTf.getText().equals(confimPasswordTf.getText()) == true)
+		okBttn.addMouseListener(new MouseListener() {
+		@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				String username = userTagTf.getText();
+				char[] password = passwordTf.getPassword();
+				char[] confirmPassword = confimPasswordTf.getPassword();
+				
+				
+				if(Arrays.equals(password, confirmPassword) == true)
 				{
 					System.out.println("Click");
 					for (IObserverInscription observer : mObservers) {
-						observer.sendInscription(userTagTf.getText(),nameTf.getText(),passwordTf.getText());
+						observer.sendInscription(userTagTf.getText(),nameTf.getText(),password);
 					}
 				}
+				else
+				{
+					System.out.println("Mauvais MDP");
+				}
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
 			}
 		});
 }
@@ -151,7 +191,7 @@ public class TwitupInscriptionView implements ISwingView , IObserverInscription 
 		return this.jPanel;
 	}
 	@Override
-	public void sendInscription(String userTag, String username, String password) {
+	public void sendInscription(String userTag, String username, char[] password) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -8,9 +8,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 import com.iup.tp.twitup.controller.observers.ILoginObserverController;
 import com.iup.tp.twitup.datamodel.User;
@@ -19,7 +21,7 @@ import com.iup.tp.twitup.ihm.observers.IObserverConfig;
 import com.iup.tp.twitup.ihm.observers.IObserverInscription;
 import com.iup.tp.twitup.ihm.observers.IObserverLogin;
 
-public class TwitupMenuView implements IObserverInscription, ILoginObserverController{
+public class TwitupMenuView implements IObserverLogin, IObserverInscription, ILoginObserverController{
 
 	private JMenuBar menuBar;
 	private JMenu loginMenu;
@@ -37,11 +39,12 @@ public class TwitupMenuView implements IObserverInscription, ILoginObserverContr
 		//JMenuBar
 		this.menuBar = new JMenuBar();
 		this.accueilMenu = new JMenu("Accueil");
-		this.aProposMenu = new JMenu("A propos");
-		this.optionMenu = new JMenu("Options");
+		this.inscriptionMenu = new JMenu("Inscription");
+		
 		this.loginMenu = new JMenu("Mon Compte");
 		this.logoutMenu = new JMenu("Déconnexion");
-		this.inscriptionMenu = new JMenu("Inscription");
+		this.optionMenu = new JMenu("Options");
+		this.aProposMenu = new JMenu("A propos");
 		this.loginMenu.setVisible(false);
 		this.logoutMenu.setVisible(false);
 		
@@ -54,12 +57,48 @@ public class TwitupMenuView implements IObserverInscription, ILoginObserverContr
 		aProposMenu.add(about);
 		
 		this.menuBar.add(accueilMenu);
-		this.menuBar.add(aProposMenu);
+		
 		this.menuBar.add(optionMenu);
 		this.menuBar.add(loginMenu);
 		this.menuBar.add(logoutMenu);
 		this.menuBar.add(inscriptionMenu);
-		
+		this.menuBar.add(aProposMenu);
+		loginMenu.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				System.out.println("Click : Mon Compte");
+				for (IObserverLogin observer : mObserversLogin) {
+					observer.monCompte();
+				}
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
 		inscriptionMenu.addMouseListener(new MouseListener() {
 
 			@Override
@@ -105,12 +144,10 @@ public class TwitupMenuView implements IObserverInscription, ILoginObserverContr
 				}
 			}
 		});
-		
+	
 		about.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("clic a propos");
-				Message msg = new Message();
-				msg.afficher_msg_info();
+				affichageAPropos();
 			}
 		});
 		
@@ -122,7 +159,7 @@ public class TwitupMenuView implements IObserverInscription, ILoginObserverContr
 				logoutMenu.setVisible(false);
 				
 				// TODO Auto-generated method stub
-				System.out.println("Config click");
+				System.out.println("Déconnexion");
 				for (IObserverLogin observer : mObserversLogin) {
 					observer.pageAccueilIsDeconnected();
 				}
@@ -158,7 +195,9 @@ public class TwitupMenuView implements IObserverInscription, ILoginObserverContr
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+				for (ILoginObserverController observer : mObservers) {
+					observer.pageAccueil();
+				}
 			}
 
 			@Override
@@ -199,11 +238,14 @@ public class TwitupMenuView implements IObserverInscription, ILoginObserverContr
 	}
 
 	@Override
-	public void sendInscription(String userTag, String username, String password) {
+	public void sendInscription(String userTag, String username, char[] password) {
 		// TODO Auto-generated method stub
 		
 	}
-
+	public void addmObserversLogin(IObserverLogin aMainController) {
+		// TODO Auto-generated method stub
+		this.mObserversLogin.add(aMainController);
+	}
 	public void addmObserversConfig(IObserverConfig unObject)
 	{
 		this.mObserversConfig.add(unObject);
@@ -235,4 +277,40 @@ public class TwitupMenuView implements IObserverInscription, ILoginObserverContr
 		// TODO Auto-generated method stub
 		
 	}
+	public void affichageAPropos() {
+		JLabel jLabel = new JLabel("UBO M2-TIIL\n DÃ©partement Informatique", JLabel.CENTER);
+		ImageIcon icon = new ImageIcon("./src/resources/images/logoIUP_50.jpg");
+		JOptionPane.showMessageDialog(null, jLabel, "A propos", JOptionPane.PLAIN_MESSAGE, icon);
+	}
+	@Override
+	public void monCompte() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void sendLogin(String username, char[] password) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void pageAccueilIsLogin() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void pageAccueilIsDeconnected() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void pageAccueil() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 }

@@ -55,14 +55,24 @@ public class User {
 	 * @param avatarPath
 	 *            , Chemin d'accès à l'image de l'avatar.
 	 */
-	public User(UUID uuid, String userTag, String userPassword, String name, Set<String> follows, String avatarPath) {
+	public User(UUID uuid, String userTag, char[] password, String name, Set<String> follows, String avatarPath) {
 		mUuid = uuid;
 		mUserTag = userTag;
-		mUserPassword = userPassword;
+		mUserPassword = String.copyValueOf(password);
 		mName = name;
 		mFollows = follows;
 		mAvatarPath = avatarPath;
 	}
+
+	public User(UUID uuid, String userTag, String password, String name, Set<String> follows, String avatarPath) {
+		mUuid = uuid;
+		mUserTag = userTag;
+		mUserPassword = password;
+		mName = name;
+		mFollows = follows;
+		mAvatarPath = avatarPath;
+	}
+
 
 	/**
 	 * Retourne l'identifiant unique de l'utilisateur.

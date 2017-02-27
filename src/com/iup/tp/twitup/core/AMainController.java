@@ -28,6 +28,7 @@ import com.iup.tp.twitup.ihm.vue.IListTweetView;
 import com.iup.tp.twitup.ihm.vue.ILoginView;
 import com.iup.tp.twitup.ihm.vue.IMainView;
 import com.iup.tp.twitup.ihm.vue.ITweetView;
+import com.iup.tp.twitup.ihm.vue.IUserView;
 import com.iup.tp.twitup.ihm.vue.IView;
 import com.iup.tp.twitup.ihm.vue.swing.TwitAddComponentSwing;
 import com.iup.tp.twitup.ihm.vue.swing.TwitListComponentSwing;
@@ -112,6 +113,14 @@ public abstract class AMainController implements ILoginObserverController, IObse
 	 */
 	protected TweetController tweetController;
 	
+	
+	protected abstract IMainView createMainView();
+	protected abstract ILoginView createLoginView();
+	protected abstract IInscriptionView createInscriptionView();
+	protected abstract IConfigView createConfigView();
+	protected abstract ITweetView createTweetView();
+	protected abstract IUserView createUserView(User unUser);
+	
 	/**
 	 * Constructeur.
 	 */
@@ -148,6 +157,7 @@ public abstract class AMainController implements ILoginObserverController, IObse
 		this.mMenuView = new TwitupMenuView();
 		this.mMenuView.addmObservers(this);
 		this.mMenuView.addmObserversConfig(this);
+		this.mMenuView.addmObserversLogin(this);
 		this.mMainView = this.createMainView(); //new TwitupMainViewS(this.mMenuView);
 		this.loginController = new LoginController(this.mDatabase, this.mEntityManager);
 		this.loginController.addmObservers(this.mMenuView);
@@ -163,11 +173,7 @@ public abstract class AMainController implements ILoginObserverController, IObse
 		// this.mMainView. Ajouter le login Controller
 	}
 
-	protected abstract IMainView createMainView();
-	protected abstract ILoginView createLoginView();
-	protected abstract IInscriptionView createInscriptionView();
-	protected abstract IConfigView createConfigView();
-	protected abstract ITweetView createTweetView();
+
 
 	/**
 	 * Initialisation du répertoire d'échange (depuis la conf ou depuis un file
@@ -242,6 +248,7 @@ public abstract class AMainController implements ILoginObserverController, IObse
 		
 //		TwitupLoginView loginView = new TwitupLoginView();
 		loginView.addObservers(unController);
+		
 		this.mMainView.showView(loginView);
 	}
 
@@ -287,6 +294,7 @@ public abstract class AMainController implements ILoginObserverController, IObse
 		this.mMainView.showView(inscriptionView);
 	}
 
+
 	
 	@Override
 	public void inscription_ok() {
@@ -297,6 +305,30 @@ public abstract class AMainController implements ILoginObserverController, IObse
 		return this.mDatabase;
 	}
 	
+	@Override
+	public void monCompte()
+	{
+		System.out.println("Mon compte");
+		IUserView userView = createUserView(this.unUser);
+		userView.addObservers(this.loginController);
+		this.mMainView.showView(userView);
+	}
+	
+	@Override 
+	public void pageAccueilIsDeconnected()
+	{
+		if(this.unUser != null)
+		{
+			System.out.println("Déconnexion");
+			this.unUser = null;
+			ILoginView loginView = createLoginView();
+			
+//			TwitupLoginView loginView = new TwitupLoginView();
+			loginView.addObservers(this.loginController);
+			this.mMainView.showView(loginView);
+		}
+	}
+
 
 	@Override
 	public void configView() {
@@ -309,19 +341,43 @@ public abstract class AMainController implements ILoginObserverController, IObse
 	@Override
 	public void pageAccueilIsLogin() {
 	}
-
-	@Override 
-	public void pageAccueilIsDeconnected()
+	
+	@Override
+	public void pageAccueil()
 	{
-		if(this.unUser != null)
+		if(this.unUser == null)
 		{
-			System.out.println("Déconnexion");
-			this.unUser = null;
-			this.showLoginView(this.loginController);
+			ILoginView loginView = createLoginView();
+			
+//			TwitupLoginView loginView = new TwitupLoginView();
+			loginView.addObservers(this.loginController);
+			
+			this.mMainView.showView(loginView);
+		}
+		else
+		{
+				this.unUser = this.loginController.getUnUser();
+				
+				this.tweetController = new TweetController(mDatabase, mEntityManager);
+				
+				TwitListComponentSwing unTwitListComponentSwing = new TwitListComponentSwing();
+				this.tweetController.addObserver(unTwitListComponentSwing);
+				
+				TwitSearchComponentSwing unTwitSearchComponentSwing = new TwitSearchComponentSwing();
+				unTwitSearchComponentSwing.setController(this.tweetController);
+				
+				this.tweetController.load();
+				
+				TwitAddComponentSwing unTwitAdd = new TwitAddComponentSwing();
+				unTwitAdd.setController(this.tweetController, this.unUser);
+				IListTweetView listView = createListTweetView(this.mDatabase.getTwits(),unTwitSearchComponentSwing,unTwitListComponentSwing,unTwitAdd);
+				System.out.println(listView);
+				this.mMainView.showView(listView);
+				//listView.setLstTwit(this.mDatabase.getTwitsWithUserTag(this.unUser.getUserTag()));
 		}
 	}
 
-
+	
 	protected abstract IListTweetView createListTweetView(Set<Twit> set, TwitSearchComponentSwing unSearch2,
 			TwitListComponentSwing unTwit2, TwitAddComponentSwing addTwit2);
 

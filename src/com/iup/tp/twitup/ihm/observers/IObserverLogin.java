@@ -6,5 +6,6 @@ public interface IObserverLogin {
 
 	public void pageAccueilIsLogin();
 	public void pageAccueilIsDeconnected();
+	public void monCompte();
 	
 }

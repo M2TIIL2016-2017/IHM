@@ -10,6 +10,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import com.iup.tp.twitup.common.Constants;
 import com.iup.tp.twitup.common.PropertiesManager;
 import com.iup.tp.twitup.datamodel.Twit;
+import com.iup.tp.twitup.datamodel.User;
 import com.iup.tp.twitup.ihm.vue.IConfigView;
 import com.iup.tp.twitup.ihm.vue.IInscriptionView;
 import com.iup.tp.twitup.ihm.vue.IListTweetView;
@@ -27,6 +28,7 @@ import com.iup.tp.twitup.ihm.vue.swing.TwitupListTwitView;
 import com.iup.tp.twitup.ihm.vue.swing.TwitupLoginView;
 import com.iup.tp.twitup.ihm.vue.swing.TwitupMainViewS;
 import com.iup.tp.twitup.ihm.vue.swing.TwitupTweetView;
+import com.iup.tp.twitup.ihm.vue.swing.TwitupUserView;
 
 public class MainControllerSwing extends AMainController {
 
@@ -66,6 +68,11 @@ public class MainControllerSwing extends AMainController {
 		return new TwitupTweetView();
 	}
 	
+	@Override
+	protected TwitupUserView createUserView(User unUser)
+	{
+		return new TwitupUserView(unUser);
+	}
 	
 
 	@Override
@@ -80,5 +87,6 @@ public class MainControllerSwing extends AMainController {
 		System.out.println("Création ListTwit");
 		return new TwitupListTwitView(set,unSearch2,unTwit2,addTwit2);
 	}
+
 
 }

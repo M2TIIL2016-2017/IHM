@@ -29,6 +29,10 @@ public class Fichier1 implements Serializable{
 		this.path_file = path_file;
 	}
 	
+	public Fichier1()
+	{
+		
+	}
 	public void saveConfig(String data) throws IOException
 	{
 		 File f = new File(Constants.CONFIGURATION_FILE);

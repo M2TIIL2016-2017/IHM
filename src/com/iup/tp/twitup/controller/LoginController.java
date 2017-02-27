@@ -89,7 +89,7 @@ public class LoginController implements IObserverLogin, IObserverInscription {
 	}
 
 	@Override
-	public void sendInscription(String userTag, String username, String password) {
+	public void sendInscription(String userTag, String username, char[] password) {
 		System.out.println("Send Inscription - Controller");
 		if (!inscriptionDoublon(userTag)) {
 
@@ -114,6 +114,12 @@ public class LoginController implements IObserverLogin, IObserverInscription {
 
 	@Override
 	public void pageAccueilIsDeconnected() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void monCompte() {
 		// TODO Auto-generated method stub
 		
 	}

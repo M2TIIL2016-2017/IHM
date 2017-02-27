@@ -6,25 +6,40 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import com.iup.tp.twitup.controller.LoginController;
 import com.iup.tp.twitup.datamodel.User;
+import com.iup.tp.twitup.ihm.Fichier1;
+import com.iup.tp.twitup.ihm.observers.IObserverInscription;
+import com.iup.tp.twitup.ihm.observers.IObserverLogin;
+import com.iup.tp.twitup.ihm.observers.IObserverUser;
+import com.iup.tp.twitup.ihm.vue.IUserView;
 
-public class TwitupUserView implements ISwingView{
+public class TwitupUserView implements ISwingView, IUserView{
 
 	private JPanel jPanel;
 //	private JMenuBar menuBar;
 	private User unUser;
-
+	protected Set<IObserverUser> mObservers;	
+	protected Fichier1 unePhoto;
 	public TwitupUserView(User unUser)
 	{
+		this.mObservers = new HashSet<IObserverUser>();
 		this.unUser = unUser;
 		panelView();
 	}
@@ -49,7 +64,10 @@ public class TwitupUserView implements ISwingView{
 		JTextField userTagTf = new JTextField(unUser.getUserTag());
 		
 		JLabel passwordLabel = new JLabel("Mot de passe : ");
-		JTextField passwordTf = new JTextField();
+		JPasswordField passwordTf = new JPasswordField();
+		
+		JLabel photoLabel = new JLabel("Photo : ");
+		JButton photoFile = new JButton("Choisir votre photo");
 		
 		JButton helpBttn = new JButton("Help");
 		JButton okBttn = new JButton("OK");
@@ -95,8 +113,16 @@ public class TwitupUserView implements ISwingView{
 		constraints.anchor = GridBagConstraints.WEST;
 		this.jPanel.add(passwordTf, constraints);
 		
-		
+		constraints.gridy++;
+		constraints.gridwidth = 1;
+		//alignment for each label must be explicitly set
+		constraints.anchor = GridBagConstraints.EAST;
+		this.jPanel.add(photoLabel, constraints);
 
+		constraints.gridx = GridBagConstraints.RELATIVE;
+		constraints.anchor = GridBagConstraints.WEST;
+		this.jPanel.add(photoFile, constraints);
+		
 		constraints.gridy++;
 		constraints.gridwidth = 3;
 		this.jPanel.add(helpBttn, constraints);
@@ -108,10 +134,22 @@ public class TwitupUserView implements ISwingView{
 		buttonBox.add(okBttn);
 		this.jPanel.add(buttonBox, constraints);
 
+		photoFile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Click");
+				unePhoto.Chargement_fic1();
+			}
+		});
 		okBttn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Click");
-				
+				String username = userTagTf.getText();
+				char[] password = passwordTf.getPassword();
+
+					System.out.println("Click");
+					for (IObserverUser observer : mObservers) {
+						observer.sendModifCompte(userTagTf.getText(),nameTf.getText(),password,unePhoto);
+					}
 			}
 		});
 }
@@ -120,6 +158,18 @@ public class TwitupUserView implements ISwingView{
 	public JComponent showView() {
 		// TODO Auto-generated method stub
 		return this.jPanel;
+	}
+
+	@Override
+	public void addObservers(IObserverUser unController) {
+		// TODO Auto-generated method stub
+		this.mObservers.add(unController);
+	}
+
+	@Override
+	public void addObservers(LoginController loginController) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

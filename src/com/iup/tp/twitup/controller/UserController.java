@@ -12,6 +12,7 @@ import com.iup.tp.twitup.controller.observers.ILoginObserverController;
 import com.iup.tp.twitup.core.EntityManager;
 import com.iup.tp.twitup.datamodel.IDatabase;
 import com.iup.tp.twitup.datamodel.User;
+import com.iup.tp.twitup.ihm.Fichier1;
 import com.iup.tp.twitup.ihm.observers.IObserverUser;
 
 public class UserController implements IObserverUser {
@@ -99,6 +100,24 @@ public class UserController implements IObserverUser {
 		return false;
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void sendModifCompte(String userTag, String username, char[]  password, Fichier1 unePhoto) {
+		// TODO Auto-generated method stub
+		Iterator<User> iterator = this.mDatabase.getUsers().iterator();
+		System.out.println(this.mDatabase.getUsers());
+		while (iterator.hasNext()) {
+			User unUser = (User) iterator.next();
+			if (unUser.getUserTag().equals(userTag) == true) {
+				if (unUser.getUserPassword().equals(password) == true) {
+					User unUserModif = unUser;
+					unUserModif.setName(username);
+					this.mDatabase.modifiyUser(unUserModif);
+					
+				}
+			}
+		}
 	}
 
 }
