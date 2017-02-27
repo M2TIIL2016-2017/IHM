@@ -18,6 +18,9 @@ import com.iup.tp.twitup.ihm.vue.IMainView;
 import com.iup.tp.twitup.ihm.vue.ITweetView;
 import com.iup.tp.twitup.ihm.vue.IView;
 import com.iup.tp.twitup.ihm.vue.swing.ISwingView;
+import com.iup.tp.twitup.ihm.vue.swing.TwitAddComponentSwing;
+import com.iup.tp.twitup.ihm.vue.swing.TwitListComponentSwing;
+import com.iup.tp.twitup.ihm.vue.swing.TwitSearchComponentSwing;
 import com.iup.tp.twitup.ihm.vue.swing.TwitupConfigView;
 import com.iup.tp.twitup.ihm.vue.swing.TwitupInscriptionView;
 import com.iup.tp.twitup.ihm.vue.swing.TwitupListTwitView;
@@ -63,10 +66,6 @@ public class MainControllerSwing extends AMainController {
 		return new TwitupTweetView();
 	}
 	
-	@Override
-	protected TwitupListTwitView createListTweetView() {
-		return new TwitupListTwitView(null);
-	}
 	
 
 	@Override
@@ -76,9 +75,10 @@ public class MainControllerSwing extends AMainController {
 	}
 
 	@Override
-	protected IListTweetView createListTweetView(Set<Twit> set) {
+	protected IListTweetView createListTweetView(Set<Twit> set,TwitSearchComponentSwing unSearch2, TwitListComponentSwing unTwit2, TwitAddComponentSwing addTwit2) {
 		// TODO Auto-generated method stub
-		return new TwitupListTwitView(set);
+		System.out.println("Création ListTwit");
+		return new TwitupListTwitView(set,unSearch2,unTwit2,addTwit2);
 	}
 
 }

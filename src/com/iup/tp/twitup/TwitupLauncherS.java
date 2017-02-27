@@ -1,6 +1,7 @@
 package com.iup.tp.twitup;
 
 import com.iup.tp.twitup.core.MainControllerSwing;
+import com.iup.tp.twitup.mock.MockController;
 
 /**
  * Classe de lancement de l'application.
@@ -18,8 +19,8 @@ public class TwitupLauncherS {
 		MainControllerSwing twitup = new MainControllerSwing();
 		twitup.show();
 		
-//		MockController mockController = new MockController(twitup.getDatabase());
-//		mockController.startMock();
+		//MockController mockController = new MockController(twitup.getDatabase());
+		//mockController.startMock();
 		
 	}
 

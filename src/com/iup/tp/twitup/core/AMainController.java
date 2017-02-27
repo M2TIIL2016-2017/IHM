@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Set;
 
+import javax.swing.JComponent;
+
 import com.iup.tp.twitup.common.Constants;
 import com.iup.tp.twitup.common.PropertiesManager;
 import com.iup.tp.twitup.controller.LoginController;
@@ -27,6 +29,9 @@ import com.iup.tp.twitup.ihm.vue.ILoginView;
 import com.iup.tp.twitup.ihm.vue.IMainView;
 import com.iup.tp.twitup.ihm.vue.ITweetView;
 import com.iup.tp.twitup.ihm.vue.IView;
+import com.iup.tp.twitup.ihm.vue.swing.TwitAddComponentSwing;
+import com.iup.tp.twitup.ihm.vue.swing.TwitListComponentSwing;
+import com.iup.tp.twitup.ihm.vue.swing.TwitSearchComponentSwing;
 import com.iup.tp.twitup.ihm.vue.swing.TwitupConfigView;
 import com.iup.tp.twitup.ihm.vue.swing.TwitupInscriptionView;
 import com.iup.tp.twitup.ihm.vue.swing.TwitupListTwitView;
@@ -34,6 +39,8 @@ import com.iup.tp.twitup.ihm.vue.swing.TwitupLoginView;
 import com.iup.tp.twitup.ihm.vue.swing.TwitupMainViewS;
 import com.iup.tp.twitup.ihm.vue.swing.TwitupMenuView;
 import com.iup.tp.twitup.ihm.vue.swing.TwitupUserView;
+import com.iup.tp.twitup.mock.swing.MockTwitListComponentSwing;
+import com.iup.tp.twitup.mock.swing.MockTwitSearchComponentSwing;
 
 /**
  * Classe principale l'application.
@@ -161,7 +168,6 @@ public abstract class AMainController implements ILoginObserverController, IObse
 	protected abstract IInscriptionView createInscriptionView();
 	protected abstract IConfigView createConfigView();
 	protected abstract ITweetView createTweetView();
-	protected abstract IListTweetView createListTweetView(Set<Twit> set);
 
 	/**
 	 * Initialisation du répertoire d'échange (depuis la conf ou depuis un file
@@ -244,16 +250,35 @@ public abstract class AMainController implements ILoginObserverController, IObse
 		
 		if (this.loginController.getUnUser() != null && this.unUser == null) {
 			this.unUser = this.loginController.getUnUser();
-			IListTweetView listView = createListTweetView(this.mDatabase.getTwits());
-			System.out.println(this.mDatabase.getTwits());
-			//listView.setLstTwit(this.mDatabase.getTwitsWithUserTag(this.unUser.getUserTag()));
+			
+			this.tweetController = new TweetController(mDatabase, mEntityManager);
+			
+			TwitListComponentSwing unTwitListComponentSwing = new TwitListComponentSwing();
+			this.tweetController.addObserver(unTwitListComponentSwing);
+			
+			TwitSearchComponentSwing unTwitSearchComponentSwing = new TwitSearchComponentSwing();
+			unTwitSearchComponentSwing.setController(this.tweetController);
+			
+			this.tweetController.searchTwits("fictif");
+			System.out.println(this.tweetController.twitList());
+			
+			TwitAddComponentSwing unTwitAdd = new TwitAddComponentSwing();
+			unTwitAdd.setController(this.tweetController, this.unUser);
+			IListTweetView listView = createListTweetView(this.mDatabase.getTwits(),unTwitSearchComponentSwing,unTwitListComponentSwing,unTwitAdd);
+			System.out.println(listView);
 			this.mMainView.showView(listView);
+			//listView.setLstTwit(this.mDatabase.getTwitsWithUserTag(this.unUser.getUserTag()));
 		} else {
 			System.out.println("Mauvaise Identification");
 		}
 	}
 
 	
+	private IListTweetView createListTweetView(Set<Twit> twits, JComponent showView, JComponent showView2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	@Override
 	public void inscription() {
 		
@@ -297,9 +322,8 @@ public abstract class AMainController implements ILoginObserverController, IObse
 		}
 	}
 
-	protected TwitupListTwitView createListTweetView() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
+	protected abstract IListTweetView createListTweetView(Set<Twit> set, TwitSearchComponentSwing unSearch2,
+			TwitListComponentSwing unTwit2, TwitAddComponentSwing addTwit2);
 
 }

@@ -1,8 +1,11 @@
 package com.iup.tp.twitup.ihm.vue.swing;
 
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
@@ -57,8 +60,13 @@ public class TwitupMainViewS implements IMainView<ISwingView>{
 	}
 	
 	public void showView(ISwingView uneVue) {
-		this.jPanel.removeAll();
-		this.jPanel.add(uneVue.showView());
+		JPanel componentPanel = new JPanel(new GridBagLayout());
+		componentPanel.add(uneVue.showView(), new GridBagConstraints(0, 0, 1, 1, 1, 1,
+				GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, new Insets(
+						0, 0, 0, 0), 0, 0));
+		
+		this.jframe.setContentPane(componentPanel);
+		this.jPanel = componentPanel;
 		this.jPanel.revalidate();
 		this.jPanel.repaint();
 	}

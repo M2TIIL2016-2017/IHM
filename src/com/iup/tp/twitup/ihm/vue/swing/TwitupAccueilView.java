@@ -24,7 +24,8 @@ public class TwitupAccueilView implements ISwingView , IObserverInscription{
 	private JPanel jPanel;
 //	private JMenuBar menuBar;
 	private Set<IObserverInscription> mObservers;
-
+	private TwitSearchComponentSwing unSearch;
+	private TwitListComponentSwing unTwit;
 	
 	public void add(IObserverInscription unObject)
 	{
@@ -38,10 +39,19 @@ public class TwitupAccueilView implements ISwingView , IObserverInscription{
 
 	private void panelView()
 	{
-		/*
-		 * Partie Option Menu
-		 * 
-		 */
+		JPanel centerPanel = new JPanel(new GridBagLayout());
+
+		centerPanel.add(unTwit, new GridBagConstraints(0,
+				0, 1, 1, 1, 0, GridBagConstraints.NORTH,
+				GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
+
+		centerPanel.add(unSearch.panel, new GridBagConstraints(0,
+				1, 1, 1, 1, 1, GridBagConstraints.CENTER,
+				GridBagConstraints.HORIZONTAL, new Insets(5, 0, 0, 0), 0, 0));
+	}
+	/*private void panelView()
+	{
+		
 //		JPanel userPanel = new JPanel();
 		
 		this.jPanel = new JPanel();
@@ -139,6 +149,7 @@ public class TwitupAccueilView implements ISwingView , IObserverInscription{
 			}
 		});
 }
+*/
 
 	@Override
 	public JComponent showView() {

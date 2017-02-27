@@ -20,17 +20,43 @@ public class TwitupListTwitView implements ActionListener, ISwingView, IListTwee
 	Thread monThread;
 	int rappidite;
 	JButton btnSabonner, btnDesabonner;
-	JPanel panel;
+	JPanel panel = new JPanel();
 	Object item;
 	JLabel lblNom, lblPrenom, lblNomduprofil, lblPrenomduprofil;
 	protected Set<Twit> lstTwits;
+	private TwitSearchComponentSwing unSearch;
+	private TwitListComponentSwing unTwit;
+	private TwitAddComponentSwing addTwit;
 	
-	public TwitupListTwitView(Set<Twit> mTwits) {
+	public TwitupListTwitView(Set<Twit> mTwits,TwitSearchComponentSwing unSearch2, TwitListComponentSwing unTwit2, TwitAddComponentSwing addTwit2) {
 		// TODO Auto-generated constructor stub
 		lstTwits =  mTwits;
+		unSearch = unSearch2;
+		unTwit = unTwit2;
+		addTwit = addTwit2;
+		System.out.println("Création ListTwit");
 		panelView();
 	}
+	
+	public void panelView()
+	{
+		
+		JPanel centerPanel = new JPanel(new GridBagLayout());
+		centerPanel.add(unSearch.showView(), new GridBagConstraints(0,
+				0, 1, 1, 1, 0, GridBagConstraints.NORTH,
+				GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
 
+		centerPanel.add(addTwit.showView(), new GridBagConstraints(0,
+				5, 1, 1, 1, 0, GridBagConstraints.NORTH,
+				GridBagConstraints.HORIZONTAL, new Insets(5, 0, 0, 0), 0, 0));
+
+		centerPanel.add(unTwit, new GridBagConstraints(0,
+				1, 1, 1, 1, 1, GridBagConstraints.CENTER,
+				GridBagConstraints.HORIZONTAL, new Insets(10, 0, 0, 0), 0, 0));
+		this.panel = new JPanel();
+		this.panel = centerPanel;
+	}
+/*
 	public void panelView() {
 		System.out.println("J'affiche un thomas");
 		panel = new JPanel();
@@ -167,16 +193,21 @@ public class TwitupListTwitView implements ActionListener, ISwingView, IListTwee
 			btnSabonner.setVisible(true);
 		}
 	}
-
+*/
 	@Override
 	public JComponent showView() {
 		// TODO Auto-generated method stub
-		this.panel.repaint();
 		return this.panel;
 	}
 
 	@Override
 	public void setLstTwit(Set<Twit> mTwits) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
